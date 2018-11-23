@@ -1,0 +1,42 @@
+<!-- <script type="text/javascript" src = "resources/js/coronajs/dashboard/dropDown.js"></script>
+<script type="text/javascript" src = "resources/js/coronajs/auth.js"></script> -->
+<nav class=" navbar-default" role="navigation" ng-controller="authController">
+	<div class="bs-example " style="margin-top:-1.5em;margin-left: 1em;width: 90%;" >
+	    <ul class="nav nav-pills">
+	        <li  ng-show="isDBHasAccess"><a href="home.html#home" ng-class="{current: $route.current.activetab == 'home'}">Home</a></li> <li class="pipeLine"  ng-hide ="tenantCode == 'SFW'">|</li>
+	        <li ng-show="isFeedHasAccess"><a href="feedFwk2.html#home" ng-class="{current: $route.current.activetab == 'adhoc'}">Adhoc Feed</a></li> <li class="pipeLine"  ng-hide ="tenantCode == 'SFW'">|</li>
+	        
+	        <li class="dropdown"  ng-show="isDashHasAccess">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle">Dashboard</a>
+				<ul id="dashDropdownId"  class="dropdown-menu">
+					<li><a href="summary.html" tabindex="0">Summary</a></li>
+					<li><a href="corona-loads.html" tabindex="0">Loads</a></li>
+					<li><a href="corona-reference.html" tabindex="0">Reference</a></li>
+					<li><a href="corona-main.html" tabindex="0">Reports</a></li>		
+				</ul>
+			</li>
+			  <li class="pipeLine"  ng-hide ="tenantCode == 'SFW'">||</li>   
+			<li ng-show="isRolesHasAccess"><a href="userRoles.html" ng-class="{current: $route.current.activetab == 'roles'}">UserRoles</a></li>
+			
+			<!-- <li class="dropdown">
+				<a href="#" onclick="userDropdown()" class="dropdown-btn">Users</a>
+				<ul id="userDropdownId"  class="dropdown-menu">
+					<li> <a  href="#">Admin User</a> </li>
+					<li><a href="#about">Super User</a></li>
+				</ul>
+			</li> -->
+         	 
+	       
+	     <!--   <li class="pipeLine" ng-show="selCustName!=''">|</li>
+	       <li ng-show="selCustName!=''" ng-init="displaySelCust()" class="display_custName"><span>Customer :</span> <a data-toggle="tooltip" data-placement="bottom" ng-click="selectCustomer(selCustKey)" title="{{selCustId}}">{{selCustName}}</a></li> -->
+	    </ul>
+	</div>
+	<!-- <div class="display_custName" ng-show="selCustName!=''" ng-init="displaySelCust()">Customer : <a data-toggle="tooltip" data-placement="bottom" ng-click="selectCustomer(selCustKey)" title="{{selCustId}}">{{selCustName}}</a> </div> -->
+</nav>
+
+<!-- <script>
+$('.dropdown-submenu > a').submenupicker();
+$(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});
+</script> -->

@@ -1,0 +1,21 @@
+<div class="row" id="changeRoleCtrl" ng-controller="ChangeRoleCtrl" ng-init="init()" >
+	<div class="customer_rows">
+		<h1 class="h1Underline" style="margin-top: 0px;">				
+			<span>Change Region Access</span>
+		</h1>
+	</div>
+   	<div class="customer_rows form-border" style="padding-top: 10px;">
+        <div class="four columns">
+            <div class="generals">
+                <span>Roles:</span>
+                <select   class="orgSelect" ng-model="selectedRole"  ng-options="option as getRoleName(option) for option in accessList">
+	            </select>
+            </div>
+        </div>
+        <div class="two columns">
+        	<div class="search">
+            <a class="btn btn-inline" ng-click="changeRegion()" >Change Region Access</a>
+        </div>
+        </div>
+    </div>
+ </div>

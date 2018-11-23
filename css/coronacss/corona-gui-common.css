@@ -1,0 +1,115 @@
+@CHARSET "ISO-8859-1";
+
+
+button.WARNING {
+
+    display:inline;
+    background-color:#CD5C5C;
+    
+}
+
+button.ACTIVE, button.Running, button.OK  {
+
+    display:inline;
+    background-color:#27AE60;
+    
+}
+
+button.FAILED, button.Not-Running  {
+
+    display:inline;
+    background-color:#E74C3C;
+    
+}
+
+button.CRITICAL {
+
+    display:inline;
+    background-color:#641E16;
+    
+}
+
+button.READY  {
+
+    display:inline;
+    background-color:#E67E22; /*58D68D;*/
+    
+}
+
+button.WAIT {
+
+    display:inline;
+    background-color:#99A3A4;
+    
+}
+button.GROUPING  {
+
+    display:inline;
+    background-color:#F4D03F;
+    
+}
+
+button.CRITICAL {
+
+    display:inline;
+    background-color:#641E16;
+    
+}
+.btn-primary-spacing 
+{
+	margin-right: 2.5em;
+	margin-bottom: 5px !important;
+}
+.center-modal {
+	position: fixed;
+	top: 10%;
+	left: 18.5%;
+	z-index: 1050;
+	width: 80%;
+	height: 80%;
+	margin-left: -10%;
+}
+
+#serviceBox {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 75px;
+	height: 250px;
+	border: 1px solid black;
+}
+
+.serviceBox1, .serviceBox2, .serviceBox3, .serviceBox4 {
+	float: left
+}
+
+.box {
+	height: 250px;
+	background-color: white;
+	border: 1px solid #bdbdbd;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 10px #bdbdbd;
+	-webkit-box-shadow: 0 0 10px #bdbdbd;
+	box-shadow: 0 0 10px #bdbdbd;
+	
+}
+
+.panel {
+  background: #ffffff;
+}
+  
+  .sectioncc{
+  width:14em !important;
+  }
+  
+  /* .dataTables_length select { ... }; */
+  
+  /* dataTables_filter_custom input[type="search"] */
+.#referenceTableId_filter > label > input {
+    background: url(../../images/hp/search-dark.png) no-repeat 5px 2px #ffffff;
+    width: 150px;
+    padding: 5px 15px 3px 30px;
+    transition: all 0.7s ease 0s;
+    border-radius: 0;
+    display: inline;
+    height: 20px;};

@@ -1,0 +1,113 @@
+.asset select {
+	width: 15%;
+	border: 2px solid #ccc;
+	color: #333;
+	float: left;
+	height: 20px;
+	overflow: auto;
+	margin-bottom: 5px;
+}
+
+span {
+	padding-top: 2px;
+	clear: both;
+	height: 20px;
+	width: 35%;
+	text-align: center;
+	color: #696969;
+	font-weight: bold;
+	float: left;
+	font-size: 11px;
+	margin: 2px 0px;
+}
+
+.load select {
+	width: 15%;
+	border: 2px solid #ccc;
+	color: #333;
+	float: left;
+	height: 20px;
+	overflow: auto;
+	margin-bottom: 5px;
+}
+
+.product select {
+	width: 15%;
+	border: 2px solid #ccc;
+	color: #333;
+	float: left;
+	height: 20px;
+	overflow: auto;
+	margin-bottom: 5px;
+}
+
+.fileUpload input[type="file"] {
+	color: #333;
+	width: 15%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.fileUpload input[type="text"] {
+	color: #333;
+	width: 15%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.fileUpload input[type="button"] {
+	color: #333;
+	width: 15%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.fileUpload button {
+	color: #333;
+	width: 10%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+
+ 
+
+.addProduct input[type="button"] {
+	color: #333;
+	width: 15%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+.addProduct button {
+	color: #333;
+	width: 10%;
+	height: 25px;
+	border: 2px solid #ccc;
+	background: #fff;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.wrapper
+{
+  border: 1px dashed #95a5a6;
+  height: 56px;
+  margin-top: 16px;
+  border-radius: 4px;
+  position: relative;
+  font-size: 12px;
+}

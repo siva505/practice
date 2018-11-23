@@ -1,0 +1,119 @@
+div[data-angular-treeview] ,div[data-angular-treeviewrank] , div[data-angular-treeviewwin], div[data-angular-treeviewwinhk], div[data-angular-treeviewquickmanage]{
+  /* prevent user selection */
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* default */
+  font-family: Tahoma;
+  font-size:13px;
+  color: #555;
+  text-decoration: none;
+}
+
+div[data-tree-model] ul ,div[data-tree-modelrank] ul, div[data-tree-modelwin] ul, div[data-tree-modelwinhk] ul, div[data-tree-modelquickmanage] ul  {
+  margin: 0;
+  padding: 0;
+  list-style: none; 
+  border: none;
+ /*  overflow: auto; */
+}
+
+div[data-tree-model] li, div[data-tree-modelrank] li, div[data-tree-modelwin] li, div[data-tree-modelwinhk] li , div[data-tree-modelquickmanage] li{
+  position: relative;
+  padding: 0 0 0 20px;
+  line-height: 20px;
+}
+
+
+div[data-tree-model] li .expanded , div[data-tree-modelrank] li .expanded, div[data-tree-modelwin] li .expanded, div[data-tree-modelwinhk] li .expanded, div[data-tree-modelquickmanage] li .expanded {
+  padding: 0px 8px;
+  background-image: url("../../images/corona/collabseImg.jpg");
+  background-repeat: no-repeat;
+}
+
+div[data-tree-model] li .collapsed, div[data-tree-modelrank] li .collapsed, div[data-tree-modelwin] li .collapsed, div[data-tree-modelwinhk] li .collapsed, div[data-tree-modelquickmanage] li .collapsed {
+  padding: 0px 8px;
+  background-image: url("../../images/corona/expandImg.jpg");
+  background-repeat: no-repeat;
+}
+
+div[data-tree-model] li .normal, div[data-tree-modelrank] li .normal, div[data-tree-modelwin] li .normal, div[data-tree-modelwinhk] li .normal , div[data-tree-modelquickmanage] li .normal{
+  padding: 0px 8px;
+  background-image: url("../../images/corona/dotboxImg.jpg");
+  background-repeat: no-repeat;
+}
+
+div[data-tree-model] li i, div[data-tree-model] li span, div[data-tree-modelrank] li i, div[data-tree-modelrank] li span, div[data-tree-modelwin] li i, div[data-tree-modelwin] li span, div[data-tree-modelwinhk] li i, div[data-tree-modelwinhk] li span, div[data-tree-modelquickmanage] li i, div[data-tree-modelquickmanage] li span {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+div[data-tree-model] li .selected, div[data-tree-modelrank] li .selected, div[data-tree-modelwin] li .selected, div[data-tree-modelwinhk] li .selected, div[data-tree-modelwin] li .selected, div[data-tree-modelwinhk] li .selected, div[data-tree-modelquickmanage] li .selected {
+  /* background-color: #aaddff;
+  font-weight: bold;
+  padding: 1px 5px; */
+  background-color: #A3A6A2;
+  font-weight: bold;
+  padding: 1px 5px;
+  color: #ffffff;
+  width:100%:
+}
+div[data-tree-modelrank] li .rc {
+  padding: 5px 10px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/R-Image.png");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelrank] li .psc {
+  padding: 5px 10px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/P-Image.png");
+  background-repeat: no-repeat;
+}
+
+div[data-tree-modelrank] li .ib {
+  padding: 5px 10px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/I-Image.png");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelrank] li .bc {
+  padding: 5px 10px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/B-Image.png");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelwinhk] li .chk {
+  padding: 0px 8px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/checkboxSelected.jpg");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelwinhk] li .unchk {
+  padding: 0px 8px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/checkboxNormal.jpg");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelwinhk] li .exclImg {
+  padding: 0px 8px;
+  margin: 0px 5px 0px 0px;
+  background-image: url("../../images/corona/alertYellow.png");
+  background-repeat: no-repeat;
+}
+/* div[data-tree-modelwinhk] li .unchkSel {
+  padding: 0px 8px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/checkboxNormalwithRedBorder.jpg");
+  background-repeat: no-repeat;
+}
+div[data-tree-modelwinhk] li .chkSel {
+  padding: 0px 8px;
+  margin: 0px 5px;
+  background-image: url("../../images/corona/checkboxSelectedwithRedBorder.jpg");
+  background-repeat: no-repeat;
+}
+ */

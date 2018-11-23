@@ -1,0 +1,329 @@
+/* 
+Custom CSS for...
+'Modern Business' HTML Theme by Start Bootstrap
+
+All Start Bootstrap themes are licensed under Apache 2.0. 
+For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap.com!
+*/
+
+/* Global Styles */
+
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,
+big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,
+dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,
+embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{
+	margin: 0;
+	/* padding: 0; */
+	/* border: 0; */
+	/* font-family: HP Simplified,Arial,sans-serif; */
+	font-size: 11px;
+	vertical-align: baseline
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.dropdown {
+    cursor:pointer;
+}
+
+
+.img-home-portfolio,
+.img-customer,
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+.tab-pane {
+    margin-top: 15px;
+}
+
+/* Page Sections */
+.section,
+.section-colored {
+    padding: 50px 0;
+}
+
+.section-colored {
+    background-color: #e1e1e1;
+    /* change this to change the background color of a colored section */
+}
+
+.sidebar {
+    margin-top: 40px;
+}
+
+.sidebar ul {
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+/* Half Page Height Carousel Customization */
+.carousel {
+    height: 50%;
+}
+
+.item,
+.active,
+.carousel-inner {
+    height: 100%;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Social Icons Styles */
+.list-social-icons {
+    margin-bottom: 45px;
+}
+
+.tooltip-social a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.facebook-link a:hover {
+    color: #3b5998;
+}
+
+.linkedin-link a:hover {
+    color: #007fb1;
+}
+
+.twitter-link a:hover {
+    color: #39a9e0;
+}
+
+.google-plus-link a:hover {
+    color: #d14836;
+}
+
+/* Service Page Styles */
+.service-icon {
+    font-size: 50px;
+}
+
+/* 404 Page Styles */
+.error-404 {
+    font-size: 8em;
+}
+
+/* Pricing Page Styles */
+.price {
+    font-size: 4em;
+}
+
+.price-cents {
+    vertical-align: super;
+    font-size: 50%;
+}
+
+.price-month {
+    font-size: 35%;
+    font-style: italic;
+}
+
+/* Footer Styles */
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+
+    .carousel {
+        height: 70%;
+        /* increases the carousel height so it looks good on phones */
+    }
+}
+
+
+.spanme {
+font-family: HP Simplified,Arial,sans-serif;
+color: #ffffff;
+font-size: 32px;
+font-weight: bold;
+}
+
+img { max-width: 100%; }
+
+
+/*Css for Header and Footer*/
+
+.top_right input[type="text"] {
+	width: 150px;
+	border: 2px solid #ccc;
+	margin-top: 13px;
+	float: left;
+	height: 22px;
+	position: relative;
+	padding-right: 25px;
+}
+
+.top_right input[type="text"]:hover {
+	border: 2px solid #ccc;
+}
+
+.top_right img {
+	cursor: pointer;
+	position: absolute;
+	float: left;
+	margin: 18px 0px 0px -25px;
+	width: 13px;
+	height: 13px;
+}
+
+.heads{
+	width: 100%;
+	background-color: #0096d6;
+	position: fixed !important;
+	top: 0px;
+	z-index: 1000;
+}
+.foots {
+	
+	color: #666;
+	font-size: 14px;
+	bottom: 0px;
+	position: fixed !important;
+	background-color: #ffffff;
+	width: 100%;
+	border-top: 1px solid #ddd;
+	z-index: 1000;
+	padding: 3px 1% 0px 0px;
+}
+
+.rad1{
+	vertical-align: top!important;
+	margin-right:2px!important;
+}
+
+.generals2{
+	clear:both;
+}
+
+.generals2 span{
+	width:100px!important;
+	float:left;
+}
+
+.general2-textarea{
+	    min-width: 88%!important;
+    min-height: 76px;
+    margin-top: 4px;
+}
+
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 89%;
+  width: 265px;
+  position: fixed;
+  z-index: 1;
+  top: 110px;
+  left: 0;
+  background-color: #d9edf7;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+.dropdown-container a{
+	font-size: 12px!important;
+	font-weight:bold!important;
+	color:#006b99!important;
+}
+
+.dropdown-container a:hover{
+	font-size: 12px!important;
+	font-weight:bold!important;
+	color:#006b99!important;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 10px 8px 10px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #006b99;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  border-bottom:1px solid #96dce9;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  font-weight:bold;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #008fcc!important;
+  color: white;
+  height:30px!important;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #bce8f1;
+  padding-left: 0px;
+  color: black!important
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+.faq-sec{
+	width:90%;
+	margin:0 auto 20px auto;
+	border:1px solid #ddd;
+	box-shadow:1px 1px 1px #ccc;
+}
+
+.faq-heading{
+	padding:10px 2%;
+	color:#000000;
+	width:100%;
+	background-color:#d9edf7;
+}
+
+.faq-body{
+	width:100%;
+	padding:10px;
+	color:#000;
+}
+
+.clear{
+	clear:both;
+}
+
+
+
+

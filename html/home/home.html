@@ -1,0 +1,781 @@
+<div class="row" ng-controller="HomeCtrl" id="HomeCtrl" ng-init="init()">
+	<div style="margin-top: 5px;">
+		<div class="alert success" ng-show="successMessage!=''">{{successMessage}}
+		</div>
+		<div class="alert error" ng-show="errorMessage!=''">
+			<span>{{errorMessage}}</span>
+		</div>
+		<div class="customer_rows">
+			<span id="messageSpan" style="color: green;"></span><span
+				id="spanIdRed" style="color: red;"></span>
+		</div>
+	</div>
+	<div ng-hide="isCompositeViewEnabled">
+		<div class="accordion">
+			<h2>
+				<span class="accordion-icon icon-minus" ng-show="toggleFilterExpand"
+					ng-click="toggleFilter()"></span> <span
+					class="accordion-icon icon-plus" ng-hide="toggleFilterExpand"
+					ng-click="toggleFilter()"></span>Filter
+			</h2>
+		</div>
+		<div class="customer_rows form-border" ng-show="toggleFilterExpand">
+			<div class="customer_rows">
+				<div class="three columns">
+					<div class="generals">
+						<span>Select View Type:</span> <select class="orgSelect"
+							ng-model="viewTypeSelected" ng-change="viewTypeChange()"
+							ng-options="item as item for item in viewTypeList">
+						</select>
+					</div>
+					<div class="generals">
+						<span>Select Module:</span> <select class="orgSelect"
+							ng-model="moduleSelected" ng-change="moduleChange()"
+							ng-options="item as item for item in moduleList">
+						</select>
+					</div>
+					<div ng-show="isBusinessView==true" class="generals2">
+						<span>Select Table:</span> <select class="orgSelect"
+							ng-model="tableSelected" ng-change="tableChange()"
+							ng-options="item.label as item.businessName for item in tableList">
+						</select>
+					</div>
+					<div ng-hide="isBusinessView==true" class="generals2">
+						<span>Select Table:</span> <select class="orgSelect"
+							ng-model="tableSelected" ng-change="tableChange()"
+							ng-options="item.label as item.label for item in tableList">
+						</select>
+					</div>
+				</div>
+				<div class="three columns" ng-hide="isBulkSelected">
+					<div class="generals2">
+						<input type="radio" value='individual' ng-model="radioSelected"
+							ng-change="radioChange()">Individual Search</input> <input
+							type="radio" value='bulk' ng-model="radioSelected"
+							ng-change="radioChange()">Bulk Search</input>
+					</div>
+					<div ng-show="isBusinessView==true">
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected1"
+								ng-options="item.label as item.businessName for item in columnList">
+							</select><input type="text" max="20" value="" ng-model="criteria1"></input>
+							<select style="width: 15%" class="orgSelect"
+								ng-model="operatorSelected1" ng-change="operatorChange(1)"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected2"
+								ng-disabled="line2disabled"
+								ng-options="item.label as item.businessName for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line2disabled"
+								ng-model="criteria2"></input> <select style="width: 15%"
+								class="orgSelect" ng-model="operatorSelected2"
+								ng-change="operatorChange(2)" ng-disabled="line2disabled"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected3"
+								ng-disabled="line3disabled"
+								ng-options="item.label as item.businessName for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line3disabled"
+								ng-model="criteria3"></input> <select style="width: 15%"
+								class="orgSelect" ng-model="operatorSelected3"
+								ng-change="operatorChange(3)" ng-disabled="line3disabled"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected4"
+								ng-disabled="line4disabled"
+								ng-options="item.label as item.businessName for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line4disabled"
+								ng-model="criteria4"></input>
+						</div>
+					</div>
+
+
+
+					<div ng-hide="isBusinessView==true">
+
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected1"
+								ng-options="item.label as item.label for item in columnList">
+							</select><input type="text" max="20" value="" ng-model="criteria1"></input>
+							<select style="width: 15%" class="orgSelect"
+								ng-model="operatorSelected1" ng-change="operatorChange(1)"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected2"
+								ng-disabled="line2disabled"
+								ng-options="item.label as item.label for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line2disabled"
+								ng-model="criteria2"></input> <select style="width: 15%"
+								class="orgSelect" ng-model="operatorSelected2"
+								ng-change="operatorChange(2)" ng-disabled="line2disabled"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected3"
+								ng-disabled="line3disabled"
+								ng-options="item.label as item.label for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line3disabled"
+								ng-model="criteria3"></input> <select style="width: 15%"
+								class="orgSelect" ng-model="operatorSelected3"
+								ng-change="operatorChange(3)" ng-disabled="line3disabled"
+								ng-options="item as item for item in operatorList">
+							</select>
+						</div>
+						<div class="generals2">
+							<select class="orgSelect" ng-model="columnSelected4"
+								ng-disabled="line4disabled"
+								ng-options="item.label as item.label for item in columnList">
+							</select><input type="text" max="20" value="" ng-disabled="line4disabled"
+								ng-model="criteria4"></input>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="three columns" ng-show="isBulkSelected">
+					<div class="generals2">
+						<input type="radio" value='individual' ng-model="radioSelected"
+							ng-change="radioChange()">Individual Search</input> <input
+							type="radio" value='bulk' ng-model="radioSelected"
+							ng-change="radioChange()">Bulk Search</input>
+					</div>
+					<div ng-show="isBusinessView==true">
+						<div class="generals">
+							<span>Select Column:</span> <select style="width: 55%"
+								class="orgSelect" ng-model="multiColumnSelected"
+								ng-options="item.label as item.businessName for item in columnList">
+							</select>
+						</div>
+						<div class="generals">
+							<span ng-if="(tableSelected !== 'PLC_SM_COUNTRY_INFO')&& (tableSelected !== 'MATERIAL_INFO')&&(tableSelected !== 'PLC GLOBAL INFO')&&(tableSelected !== 'LIST PRICE')&&(tableSelected !== 'MATERIAL_DESCRIPTION')">Multi Upload:</span>
+							<span ng-if="(tableSelected == 'PLC_SM_COUNTRY_INFO')|| (tableSelected == 'MATERIAL_INFO')||(tableSelected == 'PLC GLOBAL INFO')||(tableSelected == 'LIST PRICE')||(tableSelected == 'MATERIAL_DESCRIPTION')">SKU:</span>
+							<textarea value="" ng-model="multiColumnValue" style="text-transform:uppercase"></textarea>
+							<div ng-show="spMsg" style="color:red">Spaces Not Allowed</div>
+							</select>
+						</div>
+					</div>
+
+
+
+
+					<div ng-hide="isBusinessView==true">
+						<div class="generals">
+							<span>Select Column:</span> <select style="width: 55%"
+								class="orgSelect" ng-model="multiColumnSelected"
+								ng-options="item.label as item.label for item in columnList">
+							</select>
+						</div>
+						<div class="generals">
+							<span ng-if="(tableSelected !== 'PLC_SM_COUNTRY_INFO')&& (tableSelected !== 'MATERIAL_INFO')&&(tableSelected !== 'PLC GLOBAL INFO')&&(tableSelected !== 'LIST PRICE')&&(tableSelected !== 'MATERIAL_DESCRIPTION')">Multi Upload:</span>
+							<span ng-if="(tableSelected == 'PLC_SM_COUNTRY_INFO')|| (tableSelected == 'MATERIAL_INFO')||(tableSelected == 'PLC GLOBAL INFO')||(tableSelected == 'LIST PRICE')||(tableSelected == 'MATERIAL_DESCRIPTION')">SKU:</span>
+							<textarea value="" ng-model="multiColumnValue" style="text-transform:uppercase"></textarea>
+							<div ng-show="spMsg" style="color:red">Spaces Not Allowed</div>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="search">
+				<div class="generals">
+					<a class="btn btn-inline" ng-click="getDataSet()">Get Data</a>
+					<!-- 
+				<a class="btn btn-inline" ng-csv="exportToExcel()"
+					filename="{{ tableSelected }}.csv" field-separator=",">Export
+					to Excel</a>
+				-->
+				</div>
+			</div>
+		</div>
+
+		<!-- RESULT GRID -->
+
+
+		<div class="customer_rows">
+
+			<div class="accordion">
+				<h2>
+					<span class="accordion-icon icon-minus"
+						ng-show="toggleShowhideExpand" ng-click="toggleShowhide()"></span>
+					<span class="accordion-icon icon-plus"
+						ng-hide="toggleShowhideExpand" ng-click="toggleShowhide()"></span>Show/Hide
+					Columns
+				</h2>
+			</div>
+
+			<div class="form-border" ng-show="toggleShowhideExpand">
+				<!-- 
+			<div ng-repeat="name in tablecolumns">
+				<label><input type="checkbox"
+					ng-click="testShowHide(name.id)" checked />{{name.id}}</label>
+			</div>
+			-->
+
+				<table ng-show="isBusinessView"
+					style="width: 50%; background: #edf8fc; border: 0px;">
+					<tr ng-repeat="rows in selectedColumnsAsChunk">
+						<td ng-repeat="item in rows"><label><input
+								type="checkbox" ng-click="testShowHide(item.key)" checked />{{item.businessName}}</label></td>
+					</tr>
+				</table>
+				<table ng-hide="isBusinessView"
+					style="width: 50%; background: #edf8fc; border: 0px;">
+					<tr ng-repeat="rows in selectedColumnsAsChunk">
+						<td ng-repeat="item in rows"><label><input
+								type="checkbox" ng-click="testShowHide(item.key)" checked />{{item.label}}</label></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="accordion">
+				<h2>
+					<span class="accordion-icon icon-minus"
+						ng-show="toggleResultExpand" ng-click="toggleResult()"></span> <span
+						class="accordion-icon icon-plus" ng-hide="toggleResultExpand"
+						ng-click="toggleResult()"></span>Result
+				</h2>
+			</div>
+			<div ng-show="toggleResultExpand">
+				<div class="customer_rows" style="margin-top: 0px;">
+					<!-- 
+				<div id="showhideclmDiv" class="btn btn-refresh"
+					ng-init="mouseDownHide('tinyDropz');">
+					<div ng-click="toggle('tinyDropz');">
+						<span data-dropdown="tinyDrop">Show/Hide Column</span>
+					</div>
+					<ul id="tinyDropz" class="f-dropdown" stop-event="mousedown">
+						<li ng-repeat="column in tablecolumns"><input type="checkbox"
+							ng-model="selectedColumns[column.id]" ng-true-value="true"
+							ng-click="testShowHide()" ng-false-value="false">{{column.key
+							| removeBR}}</li>
+					</ul>
+				</div>
+			 	-->
+					<div class="dataTables_filter" id="ecc_hpegrid1_filter">
+						<label>Filter: <input type="text" ng-model="searchText"></label>
+
+						<div ng-show="isBusinessView">
+							<div class="exportToExcel"
+								ng-show="items==undefined || items.length==0">
+								<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+									csv-header="headerBusinessCsv" field-separator=","><img
+									src='resources/images/corona/export_excel7.png'></a>
+							</div>
+							<div class="exportToExcel"
+								ng-hide="items==undefined || items.length==0">
+								<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+									csv-header="headerBusinessCsv" field-separator=","><img
+									src='resources/images/corona/export_excel6.png'></a>
+							</div>
+						</div>
+						<div ng-hide="isBusinessView">
+							<div class="exportToExcel"
+								ng-show="items==undefined || items.length==0">
+								<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+									csv-header="headerSupportCsv" field-separator=","><img
+									src='resources/images/corona/export_excel7.png'></a>
+							</div>
+							<div class="exportToExcel"
+								ng-hide="items==undefined || items.length==0">
+								<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+									csv-header="headerSupportCsv" field-separator=","><img
+									src='resources/images/corona/export_excel6.png'></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="gridTable">
+					<table id="tableGrid" class="dataGrid"
+						style="width: 100%; margin-top: 15px">
+						<thead>
+							<tr class="GridHeaderRow" ng-show="isBusinessView==true">
+								<th ng-repeat="name in tablecolumns" class="table_details"
+									perspective="{{name.perspective}}"
+									ng-show="selectedColumns[name.id]"
+									ng-class="{sortedASC: ($parent.reverse==true && sortedColumn == name.columnName),sortedDESC: ($parent.reverse==false && sortedColumn == name.columnName)};"
+									ng-click="sortColumn($parent, name.id, name.columnName, name.sortLocale, name.sort);">
+									<span class="tblHeaderTxt" ng-bind-html="name.value"></span> <ng-switch
+										on="name.sort"> <span ng-switch-when="false"></span>
+									<span class="icn_srt" ng-switch-default><a
+										href="javascript:void(0)">&nbsp;</a></span> </ng-switch>
+								</th>
+							</tr>
+
+							<tr class="GridHeaderRow" ng-hide="isBusinessView==true">
+								<th ng-repeat="name in tablecolumns" class="table_details"
+									perspective="{{name.perspective}}"
+									ng-show="selectedColumns[name.id]"
+									ng-class="{sortedASC: ($parent.reverse==true && sortedColumn == name.columnName),sortedDESC: ($parent.reverse==false && sortedColumn == name.columnName)};"
+									ng-click="sortColumn($parent, name.id, name.columnName, name.sortLocale, name.sort);">
+									<span class="tblHeaderTxt" ng-bind-html="name.label"></span> <ng-switch
+										on="name.sort"> <span ng-switch-when="false"></span>
+									<span class="icn_srt" ng-switch-default><a
+										href="javascript:void(0)">&nbsp;</a></span> </ng-switch>
+								</th>
+							</tr>
+							<tr class="autoFilter font_black table_details ngomAutoFilter"></tr>
+						</thead>
+						<!-- ng-click="openCompositeView(item)" -->
+						<tbody>
+							<tr ng-class="{ odd : $index%2==0, even : !($index%2==0)}"
+								ng-repeat="item in items | filter:searchText | orderBy:predicate:reverse | startFrom:(currentPage-startIndex)*itemsPerPage | limitTo:itemsPerPage">
+								<td ng-class="sortedTD_{{columnNames[0].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[0]]">{{item.col1}}</td>
+								<td ng-class="sortedTD_{{columnNames[1].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[1]]">{{item.col2}}</td>
+								<td ng-class="sortedTD_{{columnNames[2].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[2]]">{{item.col3}}</td>
+								<td ng-class="sortedTD_{{columnNames[3].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[3]]">{{item.col4}}</td>
+								<td ng-class="sortedTD_{{columnNames[4].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[4]]">{{item.col5}}</td>
+								<td ng-class="sortedTD_{{columnNames[5].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[5]]">{{item.col6}}</td>
+								<td ng-class="sortedTD_{{columnNames[6].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[6]]">{{item.col7}}</td>
+								<td ng-class="sortedTD_{{columnNames[7].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[7]]">{{item.col8}}</td>
+								<td ng-class="sortedTD_{{columnNames[8].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[8]]">{{item.col9}}</td>
+								<td ng-class="sortedTD_{{columnNames[9].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[9]]">{{item.col10}}</td>
+								<td ng-class="sortedTD_{{columnNames[10].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[10]]">{{item.col11}}</td>
+								<td ng-class="sortedTD_{{columnNames[11].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[11]]">{{item.col12}}</td>
+								<td ng-class="sortedTD_{{columnNames[12].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[12]]">{{item.col13}}</td>
+								<td ng-class="sortedTD_{{columnNames[13].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[13]]">{{item.col14}}</td>
+								<td ng-class="sortedTD_{{columnNames[14].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[14]]">{{item.col15}}</td>
+								<td ng-class="sortedTD_{{columnNames[15].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[15]]">{{item.col16}}</td>
+								<td ng-class="sortedTD_{{columnNames[16].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[16]]">{{item.col17}}</td>
+								<td ng-class="sortedTD_{{columnNames[17].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[17]]">{{item.col18}}</td>
+								<td ng-class="sortedTD_{{columnNames[18].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[18]]">{{item.col19}}</td>
+								<td ng-class="sortedTD_{{columnNames[19].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[19]]">{{item.col20}}</td>
+								<td ng-class="sortedTD_{{columnNames[20].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[20]]">{{item.col21}}</td>
+								<td ng-class="sortedTD_{{columnNames[21].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[21]]">{{item.col22}}</td>
+								<td ng-class="sortedTD_{{columnNames[22].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[22]]">{{item.col23}}</td>
+								<td ng-class="sortedTD_{{columnNames[23].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[23]]">{{item.col24}}</td>
+								<td ng-class="sortedTD_{{columnNames[24].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[24]]">{{item.col25}}</td>
+								<td ng-class="sortedTD_{{columnNames[25].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[25]]">{{item.col26}}</td>
+								<td ng-class="sortedTD_{{columnNames[26].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[26]]">{{item.col27}}</td>
+								<td ng-class="sortedTD_{{columnNames[27].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[27]]">{{item.col28}}</td>
+								<td ng-class="sortedTD_{{columnNames[28].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[28]]">{{item.col29}}</td>
+								<td ng-class="sortedTD_{{columnNames[29].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[29]]">{{item.col30}}</td>
+								<td ng-class="sortedTD_{{columnNames[30].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[30]]">{{item.col31}}</td>
+								<td ng-class="sortedTD_{{columnNames[31].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[31]]">{{item.col32}}</td>
+								<td ng-class="sortedTD_{{columnNames[32].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[32]]">{{item.col33}}</td>
+								<td ng-class="sortedTD_{{columnNames[33].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[33]]">{{item.col34}}</td>
+								<td ng-class="sortedTD_{{columnNames[34].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[34]]">{{item.col35}}</td>
+								<td ng-class="sortedTD_{{columnNames[35].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[35]]">{{item.col36}}</td>
+								<td ng-class="sortedTD_{{columnNames[36].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[36]]">{{item.col37}}</td>
+								<td ng-class="sortedTD_{{columnNames[37].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[37]]">{{item.col38}}</td>
+								<td ng-class="sortedTD_{{columnNames[38].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[38]]">{{item.col39}}</td>
+								<td ng-class="sortedTD_{{columnNames[39].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[39]]">{{item.col40}}</td>
+								<td ng-class="sortedTD_{{columnNames[40].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[40]]">{{item.col41}}</td>
+								<td ng-class="sortedTD_{{columnNames[41].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[41]]">{{item.col42}}</td>
+								<td ng-class="sortedTD_{{columnNames[42].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[42]]">{{item.col43}}</td>
+								<td ng-class="sortedTD_{{columnNames[43].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[43]]">{{item.col44}}</td>
+								<td ng-class="sortedTD_{{columnNames[44].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[44]]">{{item.col45}}</td>
+								<td ng-class="sortedTD_{{columnNames[45].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[45]]">{{item.col46}}</td>
+								<td ng-class="sortedTD_{{columnNames[46].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[46]]">{{item.col47}}</td>
+								<td ng-class="sortedTD_{{columnNames[47].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[47]]">{{item.col48}}</td>
+								<td ng-class="sortedTD_{{columnNames[48].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[48]]">{{item.col49}}</td>
+								<td ng-class="sortedTD_{{columnNames[49].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[49]]">{{item.col50}}</td>
+								<td ng-class="sortedTD_{{columnNames[50].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[50]]">{{item.col51}}</td>
+								<td ng-class="sortedTD_{{columnNames[51].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[51]]">{{item.col52}}</td>
+								<td ng-class="sortedTD_{{columnNames[52].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[52]]">{{item.col53}}</td>
+								<td ng-class="sortedTD_{{columnNames[53].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[53]]">{{item.col54}}</td>
+								<td ng-class="sortedTD_{{columnNames[54].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[54]]">{{item.col55}}</td>
+								<td ng-class="sortedTD_{{columnNames[55].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[55]]">{{item.col56}}</td>
+								<td ng-class="sortedTD_{{columnNames[56].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[56]]">{{item.col57}}</td>
+								<td ng-class="sortedTD_{{columnNames[57].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[57]]">{{item.col58}}</td>
+								<td ng-class="sortedTD_{{columnNames[58].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[58]]">{{item.col59}}</td>
+								<td ng-class="sortedTD_{{columnNames[59].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[59]]">{{item.col60}}</td>
+								<td ng-class="sortedTD_{{columnNames[60].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[60]]">{{item.col61}}</td>
+								<td ng-class="sortedTD_{{columnNames[61].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[61]]">{{item.col62}}</td>
+								<td ng-class="sortedTD_{{columnNames[62].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[62]]">{{item.col63}}</td>
+								<td ng-class="sortedTD_{{columnNames[63].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[63]]">{{item.col64}}</td>
+								<td ng-class="sortedTD_{{columnNames[64].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[64]]">{{item.col65}}</td>
+								<td ng-class="sortedTD_{{columnNames[65].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[65]]">{{item.col66}}</td>
+								<td ng-class="sortedTD_{{columnNames[66].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[66]]">{{item.col67}}</td>
+								<td ng-class="sortedTD_{{columnNames[67].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[67]]">{{item.col68}}</td>
+								<td ng-class="sortedTD_{{columnNames[68].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[68]]">{{item.col69}}</td>
+								<td ng-class="sortedTD_{{columnNames[69].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[69]]">{{item.col70}}</td>
+								<td ng-class="sortedTD_{{columnNames[70].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[70]]">{{item.col71}}</td>
+								<td ng-class="sortedTD_{{columnNames[71].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[71]]">{{item.col72}}</td>
+								<td ng-class="sortedTD_{{columnNames[72].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[72]]">{{item.col73}}</td>
+								<td ng-class="sortedTD_{{columnNames[73].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[73]]">{{item.col74}}</td>
+								<td ng-class="sortedTD_{{columnNames[74].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[74]]">{{item.col75}}</td>
+								<td ng-class="sortedTD_{{columnNames[75].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[75]]">{{item.col76}}</td>
+								<td ng-class="sortedTD_{{columnNames[76].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[76]]">{{item.col77}}</td>
+								<td ng-class="sortedTD_{{columnNames[77].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[77]]">{{item.col78}}</td>
+								<td ng-class="sortedTD_{{columnNames[78].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[78]]">{{item.col79}}</td>
+								<td ng-class="sortedTD_{{columnNames[79].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[79]]">{{item.col80}}</td>
+								<td ng-class="sortedTD_{{columnNames[80].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[80]]">{{item.col81}}</td>
+								<td ng-class="sortedTD_{{columnNames[81].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[81]]">{{item.col82}}</td>
+								<td ng-class="sortedTD_{{columnNames[82].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[82]]">{{item.col83}}</td>
+								<td ng-class="sortedTD_{{columnNames[83].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[83]]">{{item.col84}}</td>
+								<td ng-class="sortedTD_{{columnNames[84].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[84]]">{{item.col85}}</td>
+								<td ng-class="sortedTD_{{columnNames[85].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[85]]">{{item.col86}}</td>
+								<td ng-class="sortedTD_{{columnNames[86].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[86]]">{{item.col87}}</td>
+								<td ng-class="sortedTD_{{columnNames[87].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[87]]">{{item.col88}}</td>
+								<td ng-class="sortedTD_{{columnNames[88].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[88]]">{{item.col89}}</td>
+								<td ng-class="sortedTD_{{columnNames[89].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[89]]">{{item.col90}}</td>
+								<td ng-class="sortedTD_{{columnNames[90].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[90]]">{{item.col91}}</td>
+								<td ng-class="sortedTD_{{columnNames[91].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[91]]">{{item.col92}}</td>
+								<td ng-class="sortedTD_{{columnNames[92].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[92]]">{{item.col93}}</td>
+								<td ng-class="sortedTD_{{columnNames[93].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[93]]">{{item.col94}}</td>
+								<td ng-class="sortedTD_{{columnNames[94].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[94]]">{{item.col95}}</td>
+								<td ng-class="sortedTD_{{columnNames[95].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[95]]">{{item.col96}}</td>
+								<td ng-class="sortedTD_{{columnNames[96].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[96]]">{{item.col97}}</td>
+								<td ng-class="sortedTD_{{columnNames[97].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[97]]">{{item.col98}}</td>
+								<td ng-class="sortedTD_{{columnNames[98].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[98]]">{{item.col99}}</td>
+								<td ng-class="sortedTD_{{columnNames[99].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[99]]">{{item.col100}}</td>
+								<td ng-class="sortedTD_{{columnNames[100].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[100]]">{{item.col101}}</td>
+								<td ng-class="sortedTD_{{columnNames[101].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[101]]">{{item.col102}}</td>
+								<td ng-class="sortedTD_{{columnNames[102].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[102]]">{{item.col103}}</td>
+								<td ng-class="sortedTD_{{columnNames[103].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[103]]">{{item.col104}}</td>
+								<td ng-class="sortedTD_{{columnNames[104].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[104]]">{{item.col105}}</td>
+								<td ng-class="sortedTD_{{columnNames[105].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[105]]">{{item.col106}}</td>
+								<td ng-class="sortedTD_{{columnNames[106].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[106]]">{{item.col107}}</td>
+								<td ng-class="sortedTD_{{columnNames[107].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[107]]">{{item.col108}}</td>
+								<td ng-class="sortedTD_{{columnNames[108].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[108]]">{{item.col109}}</td>
+								<td ng-class="sortedTD_{{columnNames[109].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[109]]">{{item.col110}}</td>
+								<td ng-class="sortedTD_{{columnNames[110].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[110]]">{{item.col111}}</td>
+								<td ng-class="sortedTD_{{columnNames[111].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[111]]">{{item.col112}}</td>
+								<td ng-class="sortedTD_{{columnNames[112].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[112]]">{{item.col113}}</td>
+								<td ng-class="sortedTD_{{columnNames[113].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[113]]">{{item.col114}}</td>
+								<td ng-class="sortedTD_{{columnNames[114].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[114]]">{{item.col115}}</td>
+								<td ng-class="sortedTD_{{columnNames[115].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[115]]">{{item.col116}}</td>
+								<td ng-class="sortedTD_{{columnNames[116].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[116]]">{{item.col117}}</td>
+								<td ng-class="sortedTD_{{columnNames[117].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[117]]">{{item.col118}}</td>
+								<td ng-class="sortedTD_{{columnNames[118].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[118]]">{{item.col119}}</td>
+								<td ng-class="sortedTD_{{columnNames[119].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[119]]">{{item.col120}}</td>
+								<td ng-class="sortedTD_{{columnNames[120].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[120]]">{{item.col121}}</td>
+								<td ng-class="sortedTD_{{columnNames[121].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[121]]">{{item.col122}}</td>
+								<td ng-class="sortedTD_{{columnNames[122].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[122]]">{{item.col123}}</td>
+								<td ng-class="sortedTD_{{columnNames[123].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[123]]">{{item.col124}}</td>
+								<td ng-class="sortedTD_{{columnNames[124].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[124]]">{{item.col125}}</td>
+								<td ng-class="sortedTD_{{columnNames[125].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[125]]">{{item.col126}}</td>
+								<td ng-class="sortedTD_{{columnNames[126].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[126]]">{{item.col127}}</td>
+								<td ng-class="sortedTD_{{columnNames[127].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[127]]">{{item.col128}}</td>
+								<td ng-class="sortedTD_{{columnNames[128].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[128]]">{{item.col129}}</td>
+								<td ng-class="sortedTD_{{columnNames[129].id}}"
+									ng-show="selectedColumns[selectedColumnsIndex[129]]">{{item.col130}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="customer_rows" style="margin-top: 10px;">
+					<div class="pagination ossPagination"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="isCompositeViewEnabled">
+		<div class="search">
+			<div class="generals">
+				<a class="btn btn-inline" ng-click="closeCompositeView()">Close
+					Composite View</a>
+			</div>
+		</div>
+		<tabset> <tab ng-repeat="table in childTableList"
+			heading="{{table.businessName}}" ng-click="loadComposite(table)">
+		</tab></tabset>
+		
+		<div class="gridTable">
+
+			<div class="dataTables_filter" id="ecc_hpegrid1_filter">
+				<label>Record Count: {{compositeDataSetCurrent.length}}</label>
+
+				<div class="exportToExcelComposite"
+					ng-show="compositeDataSetCurrent==undefined || compositeDataSetCurrent.length==0">
+					<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+						csv-header="headerBusinessCsv" field-separator=","><img
+						src='resources/images/corona/export_excel7.png'></a>
+				</div>
+				<div class="exportToExcelComposite"
+					ng-hide="compositeDataSetCurrent==undefined || compositeDataSetCurrent.length==0">
+					<a ng-csv="exportToExcel()" filename="{{ tableSelected }}.csv"
+						csv-header="headerBusinessCsv" field-separator=","><img
+						src='resources/images/corona/export_excel6.png'></a>
+				</div>
+			</div>
+
+			<table id="tableGrid" class="dataGrid"
+				style="width: 100%; margin-top: 15px">
+				<thead>
+					<tr class="GridHeaderRow">
+						<th ng-repeat="name in compositeHeaderList" class="table_details">
+							<span class="tblHeaderTxt" ng-bind-html="name.businessName"></span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-class="{ odd : $index%2==0, even : !($index%2==0)}"
+						ng-repeat="item in compositeDataSetCurrent track by $index">
+						<td ng-show="compositeHeaderList.length>=1">{{item.col1}}</td>
+						<td ng-show="compositeHeaderList.length>=2">{{item.col2}}</td>
+						<td ng-show="compositeHeaderList.length>=3">{{item.col3}}</td>
+						<td ng-show="compositeHeaderList.length>=4">{{item.col4}}</td>
+						<td ng-show="compositeHeaderList.length>=5">{{item.col5}}</td>
+						<td ng-show="compositeHeaderList.length>=6">{{item.col6}}</td>
+						<td ng-show="compositeHeaderList.length>=7">{{item.col7}}</td>
+						<td ng-show="compositeHeaderList.length>=8">{{item.col8}}</td>
+						<td ng-show="compositeHeaderList.length>=9">{{item.col9}}</td>
+						<td ng-show="compositeHeaderList.length>=10">{{item.col10}}</td>
+						<td ng-show="compositeHeaderList.length>=11">{{item.col11}}</td>
+						<td ng-show="compositeHeaderList.length>=12">{{item.col12}}</td>
+						<td ng-show="compositeHeaderList.length>=13">{{item.col13}}</td>
+						<td ng-show="compositeHeaderList.length>=14">{{item.col14}}</td>
+						<td ng-show="compositeHeaderList.length>=15">{{item.col15}}</td>
+						<td ng-show="compositeHeaderList.length>=16">{{item.col16}}</td>
+						<td ng-show="compositeHeaderList.length>=17">{{item.col17}}</td>
+						<td ng-show="compositeHeaderList.length>=18">{{item.col18}}</td>
+						<td ng-show="compositeHeaderList.length>=19">{{item.col19}}</td>
+						<td ng-show="compositeHeaderList.length>=20">{{item.col20}}</td>
+						<td ng-show="compositeHeaderList.length>=21">{{item.col21}}</td>
+						<td ng-show="compositeHeaderList.length>=22">{{item.col22}}</td>
+						<td ng-show="compositeHeaderList.length>=23">{{item.col23}}</td>
+						<td ng-show="compositeHeaderList.length>=24">{{item.col24}}</td>
+						<td ng-show="compositeHeaderList.length>=25">{{item.col25}}</td>
+						<td ng-show="compositeHeaderList.length>=26">{{item.col26}}</td>
+						<td ng-show="compositeHeaderList.length>=27">{{item.col27}}</td>
+						<td ng-show="compositeHeaderList.length>=28">{{item.col28}}</td>
+						<td ng-show="compositeHeaderList.length>=29">{{item.col29}}</td>
+						<td ng-show="compositeHeaderList.length>=30">{{item.col30}}</td>
+						<td ng-show="compositeHeaderList.length>=31">{{item.col31}}</td>
+						<td ng-show="compositeHeaderList.length>=32">{{item.col32}}</td>
+						<td ng-show="compositeHeaderList.length>=33">{{item.col33}}</td>
+						<td ng-show="compositeHeaderList.length>=34">{{item.col34}}</td>
+						<td ng-show="compositeHeaderList.length>=35">{{item.col35}}</td>
+						<td ng-show="compositeHeaderList.length>=36">{{item.col36}}</td>
+						<td ng-show="compositeHeaderList.length>=37">{{item.col37}}</td>
+						<td ng-show="compositeHeaderList.length>=38">{{item.col38}}</td>
+						<td ng-show="compositeHeaderList.length>=39">{{item.col39}}</td>
+						<td ng-show="compositeHeaderList.length>=40">{{item.col40}}</td>
+						<td ng-show="compositeHeaderList.length>=41">{{item.col41}}</td>
+						<td ng-show="compositeHeaderList.length>=42">{{item.col42}}</td>
+						<td ng-show="compositeHeaderList.length>=43">{{item.col43}}</td>
+						<td ng-show="compositeHeaderList.length>=44">{{item.col44}}</td>
+						<td ng-show="compositeHeaderList.length>=45">{{item.col45}}</td>
+						<td ng-show="compositeHeaderList.length>=46">{{item.col46}}</td>
+						<td ng-show="compositeHeaderList.length>=47">{{item.col47}}</td>
+						<td ng-show="compositeHeaderList.length>=48">{{item.col48}}</td>
+						<td ng-show="compositeHeaderList.length>=49">{{item.col49}}</td>
+						<td ng-show="compositeHeaderList.length>=50">{{item.col50}}</td>
+						<td ng-show="compositeHeaderList.length>=51">{{item.col51}}</td>
+						<td ng-show="compositeHeaderList.length>=52">{{item.col52}}</td>
+						<td ng-show="compositeHeaderList.length>=53">{{item.col53}}</td>
+						<td ng-show="compositeHeaderList.length>=54">{{item.col54}}</td>
+						<td ng-show="compositeHeaderList.length>=55">{{item.col55}}</td>
+						<td ng-show="compositeHeaderList.length>=56">{{item.col56}}</td>
+						<td ng-show="compositeHeaderList.length>=57">{{item.col57}}</td>
+						<td ng-show="compositeHeaderList.length>=58">{{item.col58}}</td>
+						<td ng-show="compositeHeaderList.length>=59">{{item.col59}}</td>
+						<td ng-show="compositeHeaderList.length>=60">{{item.col60}}</td>
+						<td ng-show="compositeHeaderList.length>=61">{{item.col61}}</td>
+						<td ng-show="compositeHeaderList.length>=62">{{item.col62}}</td>
+						<td ng-show="compositeHeaderList.length>=63">{{item.col63}}</td>
+						<td ng-show="compositeHeaderList.length>=64">{{item.col64}}</td>
+						<td ng-show="compositeHeaderList.length>=65">{{item.col65}}</td>
+						<td ng-show="compositeHeaderList.length>=66">{{item.col66}}</td>
+						<td ng-show="compositeHeaderList.length>=67">{{item.col67}}</td>
+						<td ng-show="compositeHeaderList.length>=68">{{item.col68}}</td>
+						<td ng-show="compositeHeaderList.length>=69">{{item.col69}}</td>
+						<td ng-show="compositeHeaderList.length>=70">{{item.col70}}</td>
+						<td ng-show="compositeHeaderList.length>=71">{{item.col71}}</td>
+						<td ng-show="compositeHeaderList.length>=72">{{item.col72}}</td>
+						<td ng-show="compositeHeaderList.length>=73">{{item.col73}}</td>
+						<td ng-show="compositeHeaderList.length>=74">{{item.col74}}</td>
+						<td ng-show="compositeHeaderList.length>=75">{{item.col75}}</td>
+						<td ng-show="compositeHeaderList.length>=76">{{item.col76}}</td>
+						<td ng-show="compositeHeaderList.length>=77">{{item.col77}}</td>
+						<td ng-show="compositeHeaderList.length>=78">{{item.col78}}</td>
+						<td ng-show="compositeHeaderList.length>=79">{{item.col79}}</td>
+						<td ng-show="compositeHeaderList.length>=80">{{item.col80}}</td>
+						<td ng-show="compositeHeaderList.length>=81">{{item.col81}}</td>
+						<td ng-show="compositeHeaderList.length>=82">{{item.col82}}</td>
+						<td ng-show="compositeHeaderList.length>=83">{{item.col83}}</td>
+						<td ng-show="compositeHeaderList.length>=84">{{item.col84}}</td>
+						<td ng-show="compositeHeaderList.length>=85">{{item.col85}}</td>
+						<td ng-show="compositeHeaderList.length>=86">{{item.col86}}</td>
+						<td ng-show="compositeHeaderList.length>=87">{{item.col87}}</td>
+						<td ng-show="compositeHeaderList.length>=88">{{item.col88}}</td>
+						<td ng-show="compositeHeaderList.length>=89">{{item.col89}}</td>
+						<td ng-show="compositeHeaderList.length>=90">{{item.col90}}</td>
+						<td ng-show="compositeHeaderList.length>=91">{{item.col91}}</td>
+						<td ng-show="compositeHeaderList.length>=92">{{item.col92}}</td>
+						<td ng-show="compositeHeaderList.length>=93">{{item.col93}}</td>
+						<td ng-show="compositeHeaderList.length>=94">{{item.col94}}</td>
+						<td ng-show="compositeHeaderList.length>=95">{{item.col95}}</td>
+						<td ng-show="compositeHeaderList.length>=96">{{item.col96}}</td>
+						<td ng-show="compositeHeaderList.length>=97">{{item.col97}}</td>
+						<td ng-show="compositeHeaderList.length>=98">{{item.col98}}</td>
+						<td ng-show="compositeHeaderList.length>=99">{{item.col99}}</td>
+						<td ng-show="compositeHeaderList.length>=100">{{item.col100}}</td>
+						<td ng-show="compositeHeaderList.length>=101">{{item.col101}}</td>
+						<td ng-show="compositeHeaderList.length>=102">{{item.col102}}</td>
+						<td ng-show="compositeHeaderList.length>=103">{{item.col103}}</td>
+						<td ng-show="compositeHeaderList.length>=104">{{item.col104}}</td>
+						<td ng-show="compositeHeaderList.length>=105">{{item.col105}}</td>
+						<td ng-show="compositeHeaderList.length>=106">{{item.col106}}</td>
+						<td ng-show="compositeHeaderList.length>=107">{{item.col107}}</td>
+						<td ng-show="compositeHeaderList.length>=108">{{item.col108}}</td>
+						<td ng-show="compositeHeaderList.length>=109">{{item.col109}}</td>
+						<td ng-show="compositeHeaderList.length>=110">{{item.col110}}</td>
+						<td ng-show="compositeHeaderList.length>=111">{{item.col111}}</td>
+						<td ng-show="compositeHeaderList.length>=112">{{item.col112}}</td>
+						<td ng-show="compositeHeaderList.length>=113">{{item.col113}}</td>
+						<td ng-show="compositeHeaderList.length>=114">{{item.col114}}</td>
+						<td ng-show="compositeHeaderList.length>=115">{{item.col115}}</td>
+						<td ng-show="compositeHeaderList.length>=116">{{item.col116}}</td>
+						<td ng-show="compositeHeaderList.length>=117">{{item.col117}}</td>
+						<td ng-show="compositeHeaderList.length>=118">{{item.col118}}</td>
+						<td ng-show="compositeHeaderList.length>=119">{{item.col119}}</td>
+						<td ng-show="compositeHeaderList.length>=120">{{item.col120}}</td>
+						<td ng-show="compositeHeaderList.length>=121">{{item.col121}}</td>
+						<td ng-show="compositeHeaderList.length>=122">{{item.col122}}</td>
+						<td ng-show="compositeHeaderList.length>=123">{{item.col123}}</td>
+						<td ng-show="compositeHeaderList.length>=124">{{item.col124}}</td>
+						<td ng-show="compositeHeaderList.length>=125">{{item.col125}}</td>
+						<td ng-show="compositeHeaderList.length>=126">{{item.col126}}</td>
+						<td ng-show="compositeHeaderList.length>=127">{{item.col127}}</td>
+						<td ng-show="compositeHeaderList.length>=128">{{item.col128}}</td>
+						<td ng-show="compositeHeaderList.length>=129">{{item.col129}}</td>
+						<td ng-show="compositeHeaderList.length>=130">{{item.col130}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- </tab> </tabset> -->
+	</div>
+
+</div>
